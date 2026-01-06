@@ -1,65 +1,195 @@
-import Image from "next/image";
+import FallingLeaves from "@/app/components/effects/FallingLeaves";
+import { Button } from "@/app/components/ui/button";
+import Link from "next/link";
+import { ArrowRight, Leaf, Recycle, Users, Sprout, ChevronRight } from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="flex flex-col min-h-screen relative overflow-x-hidden bg-cream">
+      
+      {/* GLOBAL BACKGROUND ELEMENTS */}
+      <FallingLeaves />
+      
+      {/* --- UPDATED GRADIENT BLOBS --- */}
+      {/* Top Right: Rich Emerald Glow (Matching intensity of the About page) */}
+      <div className="fixed top-0 right-0 w-[40vw] h-[40vw] bg-emerald-400/20 rounded-full blur-[100px] -z-10 opacity-50" />
+      {/* Bottom Left: Soft Vibrant Green Glow */}
+      <div className="fixed bottom-0 left-0 w-[40vw] h-[40vw] bg-green-300/30 rounded-full blur-[100px] -z-10 opacity-40" />
+
+
+      {/* --- HERO SECTION (Split Layout) --- */}
+      <section className="relative min-h-[90vh] flex items-center pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          
+          {/* LEFT: Text Content */}
+          <div className="space-y-8 relative z-10 text-left">
+            
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-[#1C3D2E]/5 border border-[#1C3D2E]/10 text-[#1C3D2E] text-sm font-semibold tracking-wide w-fit">
+              <Sprout size={14} className="text-[#2A5240] fill-current" />
+              <span>Green Club AISSMS IOIT</span>
+            </div>
+            
+            {/* Headline */}
+            <h1 className="font-heading font-bold text-5xl sm:text-6xl lg:text-7xl text-[#1C3D2E] leading-[1.1]">
+              One Action at a <br/>
+              <span className="relative inline-block">
+                <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-[#1C3D2E] to-emerald-600">
+                  Time.
+                </span>
+                {/* Green Underline Decoration */}
+                <span className="absolute bottom-2 left-0 w-full h-3 bg-[#DDF5C8]/60 -z-10 rounded-sm -rotate-2"></span>
+              </span>
+            </h1>
+            
+            {/* Subtext */}
+            <p className="text-stone-600 text-lg md:text-xl max-w-lg leading-relaxed">
+              We are the student force driving sustainability. From restoring <span className="font-semibold text-[#1C3D2E]">Kanifnath Tekdi</span> to transforming campus waste into resources.
+            </p>
+            
+            <div className="flex flex-wrap items-center gap-4">
+                
+                {/* Button 1: Dark Green Background (Hardcoded Hex) */}
+                <Button asChild className="h-14 px-8 rounded-2xl bg-[#1C3D2E] text-white hover:bg-[#1C3D2E]/90 hover:scale-105 transition-all shadow-xl shadow-[#1C3D2E]/20 text-base font-semibold">
+                  <Link href="/events" className="flex items-center gap-2">
+                    Explore Our Impact <ArrowRight size={18} />
+                  </Link>
+                </Button>
+                
+                {/* Button 2: White Background with Dark Border (Hardcoded Hex) */}
+                <Button asChild variant="ghost" className="h-14 px-6 bg-white border-2 border-[#1C3D2E] text-[#1C3D2E] hover:bg-[#DDF5C8] hover:text-[#1C3D2E] text-base font-bold rounded-2xl transition-all">
+                  <Link href="/about" className="flex items-center gap-2">
+                    Read Our Mission <ChevronRight size={18} />
+                  </Link>
+                </Button>
+
+            </div>
+
+            {/* Small Stat */}
+            <div className="pt-4 flex items-center gap-4 text-sm text-stone-500">
+              <div className="flex -space-x-3">
+                  {[1,2,3].map(i => (
+                    <div key={i} className="w-8 h-8 rounded-full bg-stone-200 border-2 border-white flex items-center justify-center overflow-hidden">
+                      <div className="w-full h-full bg-stone-300"></div> 
+                    </div>
+                  ))}
+              </div>
+              <p><span className="font-bold text-[#1C3D2E]">30+</span> Volunteers Joined</p>
+            </div>
+
+          </div>
+
+          {/* RIGHT: Visual Collage */}
+          <div className="relative z-10 hidden lg:block h-full min-h-[500px]">
+              {/* Main Large Image */}
+              <div className="absolute top-0 right-0 w-[90%] h-[85%] rounded-[2.5rem] overflow-hidden shadow-2xl shadow-[#1C3D2E]/10 border-[6px] border-white rotate-2 z-10 group">
+                <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=2613&auto=format&fit=crop')] bg-cover bg-center transition-transform duration-700 group-hover:scale-105"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1C3D2E]/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-8">
+                </div>
+              </div>
+
+              {/* Floating Badge Card */}
+              <div className="absolute bottom-10 left-4 w-48 bg-white p-4 rounded-2xl shadow-xl shadow-stone-200/50 border border-[#DDF5C8] z-20 animate-bounce-slow">
+                <div className="flex items-center gap-3 mb-2">
+                    <div className="w-10 h-10 bg-[#DDF5C8] rounded-full flex items-center justify-center text-[#1C3D2E]">
+                      <Leaf size={20} />
+                    </div>
+                    <div>
+                      <p className="text-xs text-stone-400 font-bold uppercase">Total Planted</p>
+                      <p className="text-xl font-bold text-[#1C3D2E]">300+</p>
+                    </div>
+                </div>
+                <div className="w-full bg-stone-100 h-1.5 rounded-full overflow-hidden">
+                  <div className="w-[80%] bg-[#1C3D2E] h-full rounded-full"></div>
+                </div>
+              </div>
+          </div>
+
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+      </section>
+
+
+      {/* --- STATS & INTRO --- */}
+      <section className="relative py-24 bg-white/50 backdrop-blur-sm z-10 border-t border-leaf/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div className="text-center mb-16">
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-forest mb-4">Why We Do It</h2>
+            <p className="text-stone-dark max-w-2xl mx-auto text-lg">
+              Our campus is our starting point, but our vision is global. We believe in engineering solutions for the planet.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <FeatureCard 
+              icon={<Leaf className="w-6 h-6 text-forest" />}
+              title="Biodiversity"
+              desc="Restoring native flora through active plantation drives at Kanifnath Tekdi."
+              color="bg-green-50"
+              border="border-green-100"
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <FeatureCard 
+              icon={<Recycle className="w-6 h-6 text-emerald-700" />}
+              title="Waste Management"
+              desc="Systematic E-waste collection and plastic-free campus initiatives."
+              color="bg-emerald-50"
+              border="border-emerald-100"
+            />
+            <FeatureCard 
+              icon={<Users className="w-6 h-6 text-teal-700" />}
+              title="Community"
+              desc="Over 30+ active student volunteers bridging technology and nature."
+              color="bg-teal-50"
+              border="border-teal-100"
+            />
+          </div>
         </div>
-      </main>
+      </section>
+
+
+      {/* --- BIG VISUAL SECTION --- */}
+      <section className="relative py-32 z-10 overflow-hidden my-10">
+        <div className="max-w-7xl mx-auto px-4 rounded-[3rem] overflow-hidden relative min-h-[400px] flex items-center justify-center">
+            {/* Background Image */}
+            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?q=80&w=2727&auto=format&fit=crop')] bg-cover bg-center"></div>
+            {/* Overlay */}
+            <div className="absolute inset-0 bg-forest/80 mix-blend-multiply"></div>
+            
+            <div className="relative z-10 max-w-3xl mx-auto text-center px-4">
+              <Sprout size={48} className="text-leaf mx-auto mb-6 opacity-80" />
+              <h2 className="font-heading text-3xl md:text-5xl font-bold text-white mb-8 leading-tight">
+                "We don't inherit the earth from our ancestors, we borrow it from our children."
+              </h2>
+              <Button asChild size="lg" variant="ghost" className="h-14 px-6 bg-black/20 backdrop-blur-md border border-white/20 text-white ring-1 ring-white/30 hover:bg-[#ddf5c81e] hover:text-[#16965cbd] hover:ring-[#1C3D2E]/40 text-base font-bold rounded-2xl transition-all duration-300 ease-out">
+                <Link href="/events">See Our Latest Drive</Link>
+              </Button>
+            </div>
+        </div>
+      </section>
+
+      {/* Spacer for Footer overlap */}
+      <div className="h-20"></div>
+
     </div>
   );
+}
+
+function FeatureCard({ icon, title, desc, color, border }: { icon: React.ReactNode, title: string, desc: string, color: string, border: string }) {
+  return (
+    <div className={`relative group bg-white p-8 rounded-3xl border ${border} shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden`}>
+      
+      {/* Subtle background blob on hover */}
+      <div className={`absolute -right-4 -top-4 w-24 h-24 ${color} rounded-full opacity-0 group-hover:opacity-50 transition-all duration-500 blur-2xl`} />
+
+      {/* ICON WITH TILT ANIMATION */}
+      <div className={`relative mb-5 ${color} w-14 h-14 rounded-2xl flex items-center justify-center 
+        rotate-3 group-hover:rotate-12 group-hover:scale-110 transition-transform duration-300 ease-out shadow-sm`}>
+        {icon}
+      </div>
+      
+      <h3 className="font-heading font-bold text-xl text-forest mb-3 relative z-10">{title}</h3>
+      <p className="text-stone-dark leading-relaxed text-sm relative z-10">{desc}</p>
+    </div>
+  )
 }
