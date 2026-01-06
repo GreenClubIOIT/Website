@@ -12,7 +12,7 @@ export default function NotFound() {
       <p className="text-stone-dark mb-8 max-w-md">
         Looks like you've wandered off the path. Let's get you back to the green zone.
       </p>
-      <Button asChild size="lg">
+      <Button asChild variant="olive" size="lg">
         <Link href="/">Return Home</Link>
       </Button>
     </div>
