@@ -1,6 +1,8 @@
 import { google } from '@ai-sdk/google';
 import { streamText } from 'ai';
 
+export const runtime = "nodejs";
+
 export const maxDuration = 30;
 
 export async function POST(req: Request) {
@@ -8,12 +10,6 @@ export async function POST(req: Request) {
     // console.log('📨 Chat route called');
 
     const { messages } = await req.json();
-
-    const apiKey = process.env.GOOGLE_GENERATIVE_AI_API_KEY;
-    if (!apiKey) {
-      console.error('❌ GOOGLE_GENERATIVE_AI_API_KEY is missing from env variables');
-      return new Response(JSON.stringify({ error: 'Missing API Key on Server' }), { status: 500 });
-    }
 
     const model = google('gemini-2.5-flash-lite');
 
