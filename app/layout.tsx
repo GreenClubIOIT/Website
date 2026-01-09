@@ -18,6 +18,9 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Green Club AISSMS IOIT",
   description: "Cultivating environmentally responsible engineers.",
+  icons: {
+    icon: "/logo (2).svg",
+  },
 };
 
 export default function RootLayout({
