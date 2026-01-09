@@ -9,7 +9,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrambleTextPlugin } from "gsap/ScrambleTextPlugin";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import confetti from "canvas-confetti"; // Import Confetti
+import confetti from "canvas-confetti"; 
 
 // Register Plugins
 gsap.registerPlugin(ScrambleTextPlugin, ScrollTrigger);

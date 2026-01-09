@@ -1,14 +1,18 @@
+"use client";
+
 import FallingLeaves from "@/app/components/effects/FallingLeaves";
-import { Button } from "@/app/components/ui/Button";
 import RotatingEarth from "@/app/components/effects/RotatingEarth";
-import { Calendar, MapPin, Users, CheckCircle2, Sprout } from "lucide-react";
+import { Button } from "@/app/components/ui/Button";
+import { Calendar, MapPin, Users, CheckCircle2, Sprout, Leaf } from "lucide-react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 // Using distinct images for the demo
 const IMG_PLANTATION = "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=2613&auto=format&fit=crop";
 const IMG_DIWALI = "https://images.unsplash.com/photo-1496449903678-68ddcb189a24?q=80&w=2670&auto=format&fit=crop";
 
 export default function EventsPage() {
+  
   const events = [
     {
       id: 1,
@@ -21,21 +25,73 @@ export default function EventsPage() {
       description: "Celebrating Independence Day with a commitment to the environment. We planted 100 native (desi) tree saplings to promote biodiversity and restore the local ecosystem.",
       highlights: ["100 Native Saplings Planted", "Faculty & Student Participation", "Partnered with Swayamprerak NGO"],
       status: "Completed",
-      image: IMG_PLANTATION
+      image: "/kanifnath.png"
     },
     {
       id: 2,
       title: "Pollution-Free Diwali",
-      date: "15 Oct 2025",
-      fullDate: "October 15, 2025",
+      date: "12 April 2025",
+      fullDate: "April 12, 2025",
       time: "3:00 PM - 5:30 PM",
-      location: "MPH, AISSMS IOIT, Pune",
+      location: "Botanical Study Site, PCMC",
       category: "Awareness",
-      description: "An enlightening session with Mr. Sagar Dani encouraging students to celebrate an eco-friendly Diwali. Students showcased 'Technosavi' ideas for a cleaner festival.",
-      highlights: ["Expert Talk on Eco-Festivals", "Innovative Student Projects", "Green Diwali Pledge Taken"],
+      description: "A hands-on learning activity focused on understanding plant diversity, medicinal plants and the role of greenery in maintaining ecological balance.",
+      highlights: ["Identification of medicinal & native plants", "Learning plant care and ecology", "Practical exposure to botany concepts"],
       status: "Completed",
-      image: IMG_DIWALI
-    }
+      image: "/botanical_plant.png"
+    },
+    {
+      id: 3,
+      title: "PCMC Water Treatment Plant",
+      date: "12 April 2025",
+      fullDate: "April 12, 2025",
+      time: "10:00 AM - 1:00 PM",
+      location: "PCMC Water Treatment Plant",
+      category: "Awareness",
+      description: "An educational industrial visit to understand the complete process of water treatment and public water supply management.",
+      highlights: ["Understanding sedimentation, filtration & chlorination", "Exposure to real-time municipal infrastructure", "Guided by PCMC officials"],
+      status: "Completed",
+      image: "/pcmc_water.png"
+    },
+    {
+      id: 4,
+      title: "Pawna River Awareness Camp",
+      date: "16 March 2025",
+      fullDate: "March 16, 2025",
+      time: "10:00 AM - 5:30 PM",
+      location: "Pawna River Region",
+      category: "Field Drive",
+      description: "A focused awareness initiative addressing river pollution, its impact on ecosystems, and the role of community participation.",
+      highlights: ["Study of river pollution and its effects", "Promoted responsible waste disposal","Awareness sessions with local residents" ],
+      status: "Completed",
+      image: "/pawna_river.png"
+    },
+    {
+      id: 5,
+      title: "Plastic Cleanliness Drive",
+      date: "1 March 2025",
+      fullDate: "March 1, 2025",
+      time: "10:00 AM - 5:30 PM",
+      location: "Lohagad Fort",
+      category: "Field Drive",
+      description: "A cleanliness and awareness drive aimed at removing plastic waste from a heritage site and promoting responsible tourism.",
+      highlights: ["Plastic waste collection at Lohagad Fort", "Awareness among trekkers and visitors", "Promoted plastic-free heritage conservation"],
+      status: "Completed",
+      image: "/lohagad_plastic.png"
+    },
+    {
+      id: 6,
+      title: "E-Waste Collection Drive",
+      date: "6 Feb 2025",
+      fullDate: "Feburary 6, 2025",
+      time: "10:00 AM - 5:30 PM",
+      location: "AISSMS IOIT Campus, Pune",
+      category: "Awareness",
+      description: "Promoting responsible disposal of electronic waste and creating awareness about environmental and health hazards caused by improper e-waste management.",
+      highlights: ["Collection of household & academic e-waste", "Active participation from students & faculty", "In collaboration with Swayamprerak NGO"],
+      status: "Completed",
+      image: "/zero_e_waste.jpg", 
+    },
   ];
 
   return (
@@ -46,87 +102,160 @@ export default function EventsPage() {
       <div className="fixed top-0 right-0 w-[40vw] h-[40vw] bg-emerald-400/20 rounded-full blur-[100px] -z-10 opacity-50" />
       <div className="fixed bottom-0 left-0 w-[40vw] h-[40vw] bg-green-300/30 rounded-full blur-[100px] -z-10 opacity-40" />
 
-
       {/* --- HEADER --- */}
       <section className="pt-32 pb-16 text-center max-w-4xl mx-auto px-4 relative z-10">
-        <div className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-white border border-[#1C3D2E]/10 shadow-sm text-[#1C3D2E] text-sm font-semibold tracking-wide mb-6 animate-fade-in-up">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-white border border-[#1C3D2E]/10 shadow-sm text-[#1C3D2E] text-sm font-semibold tracking-wide mb-6"
+        >
            <Sprout size={14} className="text-[#2A5240] fill-current" />
            <span>Our Impact Report</span>
-        </div>
+        </motion.div>
         
-        <h1 className="font-heading font-bold text-4xl md:text-6xl text-[#1C3D2E] mb-6 leading-tight">
+        <motion.h1 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="font-heading font-bold text-4xl md:text-6xl text-[#1C3D2E] mb-6 leading-tight"
+        >
           Recent <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1C3D2E] to-emerald-600">Initiatives</span>
-        </h1>
-        
-        <p className="text-stone-600 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
-          From hands-on plantation drives to interactive seminars, look back at how we are making a difference.
-        </p>
+        </motion.h1>
       </section>
 
 
-      {/* --- EVENTS LIST --- */}
-      <section className="max-w-6xl mx-auto px-4 pb-32 relative z-10 space-y-24">
+      {/* --- TIMELINE SECTION --- */}
+      <section className="max-w-7xl mx-auto px-4 pb-32 relative z-10">
+
+      {/* CENTRAL STEM (Desktop Only) */}
+      <div className="absolute left-1/2 top-0 bottom-32 w-px -translate-x-1/2 hidden md:block
+        bg-gradient-to-b from-transparent via-[#1C3D2E]/20 to-transparent
+        border-l border-dashed border-[#1C3D2E]/30"
+      />
+
+      <div className="space-y-12 md:space-y-24">
         {events.map((event, index) => (
-          <div 
-            key={event.id} 
-            className={`flex flex-col gap-8 md:gap-12 items-center ${index % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'}`}
+          <motion.div
+            key={event.id}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.7, ease: 'easeOut' }}
+            className={`relative flex flex-col items-center gap-8 md:gap-12
+              ${index % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'}`}
           >
-            
-            {/* IMAGE SIDE */}
-            <div className="w-full md:w-1/2 relative group">
-              <div className="relative h-[300px] md:h-[400px] w-full rounded-[2rem] overflow-hidden shadow-xl shadow-[#1C3D2E]/10 border-4 border-white">
-                <Image 
-                  src={event.image} 
-                  alt={event.title}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-md py-1 px-3 rounded-full text-xs font-bold text-[#1C3D2E] uppercase tracking-wider shadow-sm">
-                  {event.status}
-                </div>
-              </div>
-              <div className={`absolute -inset-4 rounded-[2.5rem] -z-10 opacity-60 blur-2xl ${index % 2 === 0 ? 'bg-[#DDF5C8]/40 -rotate-2' : 'bg-emerald-200/40 rotate-2'}`}></div>
+
+            {/* CENTRAL NODE */}
+            <div className="absolute left-1/2 top-1/2 hidden md:flex
+              -translate-x-1/2 -translate-y-1/2
+              w-12 h-12 items-center justify-center
+              rounded-full bg-cream border-4 border-white
+              shadow-md z-10"
+            >
+              <Leaf size={20} className="text-[#1C3D2E]" />
             </div>
 
+            {/* IMAGE SIDE */}
+            {/* IMAGE SIDE */}
+            <div className="w-full md:w-1/2 relative group">
+
+              {/* ROTATION WRAPPER */}
+              <div className="relative transition-transform duration-500 hover:-rotate-1">
+
+                {/* SHARP CARD */}
+                <div className="relative h-[300px] md:h-[400px] w-full
+                  border-4 border-white
+                  shadow-xl shadow-[#1C3D2E]/10
+                  bg-white"
+                >
+                  <Image
+                    src={event.image}
+                    alt={event.title}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+
+                  {/* STATUS BADGE */}
+                  <div className="absolute top-4 left-4
+                    bg-white/90 backdrop-blur-md
+                    px-3 py-1 text-xs font-bold uppercase tracking-wider
+                    text-[#1C3D2E] shadow-sm flex items-center gap-1"
+                  >
+                    <span className="w-2 h-2 bg-green-500 animate-pulse" />
+                    {event.status}
+                  </div>
+                </div>
+              </div>
+
+              {/* DECORATIVE BACKDROP */}
+              <div
+                className={`absolute -inset-6 -z-10 opacity-50 blur-2xl
+                  transition-opacity duration-500 group-hover:opacity-70
+                  ${index % 2 === 0
+                    ? 'bg-[#DDF5C8]/40'
+                    : 'bg-emerald-200/40'
+                  }`}
+              />
+            </div>
 
             {/* CONTENT SIDE */}
-            <div className="w-full md:w-1/2 space-y-6">
-              <div className="flex items-center flex-wrap gap-4 text-sm font-medium text-stone-500">
-                <span className="flex items-center gap-1.5 bg-white px-3 py-1 rounded-lg border border-stone-100 shadow-sm text-[#1C3D2E]">
-                  <Calendar size={14} /> {event.fullDate}
+            <div className="w-full md:w-1/2 px-4 md:px-0 space-y-6">
+
+              <div className="flex flex-wrap items-center gap-4 text-sm font-medium text-stone-500">
+                <span className="flex items-center gap-1.5 bg-white px-3 py-1
+                  rounded-lg border border-stone-100 shadow-sm text-[#1C3D2E]"
+                >
+                  <Calendar size={14} />
+                  {event.fullDate}
                 </span>
+
                 <span className="flex items-center gap-1.5">
-                  <MapPin size={14} className="text-[#2A5240]" /> {event.location}
+                  <MapPin size={14} className="text-[#2A5240]" />
+                  {event.location}
                 </span>
               </div>
 
-              <h2 className="font-heading text-3xl md:text-4xl font-bold text-[#1C3D2E] leading-tight">
+              <h2 className="font-heading text-3xl md:text-4xl font-bold text-[#1C3D2E]">
                 {event.title}
               </h2>
-              
-              <p className="text-stone-600 text-lg leading-relaxed">
+
+              <p className="text-lg text-stone-600 leading-relaxed">
                 {event.description}
               </p>
 
-              <div className="bg-[#1C3D2E]/5 rounded-2xl p-6 border border-[#1C3D2E]/5">
-                <h4 className="font-bold text-[#1C3D2E] mb-3 flex items-center gap-2">
-                  <Users size={18} /> Key Highlights
+              {/* HIGHLIGHTS */}
+              <div className="bg-white rounded-2xl p-6
+                border border-[#1C3D2E]/10 shadow-sm
+                hover:shadow-md transition-shadow"
+              >
+                <h4 className="mb-3 flex items-center gap-2
+                  text-sm font-bold uppercase tracking-wide text-[#1C3D2E]"
+                >
+                  <Users size={16} />
+                  Impact Highlights
                 </h4>
-                <ul className="space-y-2">
+
+                <ul className="space-y-3">
                   {event.highlights.map((highlight, i) => (
-                    <li key={i} className="flex items-start gap-3 text-stone-700 text-sm">
-                      <CheckCircle2 size={16} className="text-[#2A5240] mt-0.5 shrink-0" />
+                    <li key={i} className="flex items-start gap-3 text-sm text-stone-700">
+                      <div className="mt-0.5 p-0.5 bg-green-100 rounded-full">
+                        <CheckCircle2 size={14} className="text-green-700" />
+                      </div>
                       <span>{highlight}</span>
                     </li>
                   ))}
                 </ul>
               </div>
-            </div>
-          </div>
-        ))}
-      </section>
 
-      {/* --- CTA SECTION --- */}
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </section>
+
+
+       {/* --- CTA SECTION --- */}
       <section className="py-24 px-4 relative z-10">
         <div className="max-w-6xl mx-auto bg-[#1C3D2E] rounded-[3rem] relative overflow-hidden flex flex-col md:flex-row items-center justify-between shadow-2xl shadow-[#1C3D2E]/30 min-h-[400px]">
           
@@ -165,7 +294,6 @@ export default function EventsPage() {
 
         </div>
       </section>
-
     </div>
   );
 }
