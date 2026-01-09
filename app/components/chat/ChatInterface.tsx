@@ -3,7 +3,7 @@
 import { useChat } from 'ai/react';
 import { useRef, useEffect } from 'react';
 import FallingLeaves from "@/app/components/effects/FallingLeaves";
-import { Button } from "@/app/components/ui/button";
+import { Button } from "@/app/components/ui/Button";
 import { Send, Sprout, Bot, User, Sparkles } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import MarkdownMessage from "@/app/components/markdown/MarkdownMessage";

@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
-import { Button } from '@/app/components/ui/button';
+import { Button } from '@/app/components/ui/Button';
 import { cn } from '@/lib/utils';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image'; 

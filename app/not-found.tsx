@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Button } from '@/app/components/ui/button'
+import { Button } from '@/app/components/ui/Button'
 import { Leaf } from 'lucide-react'
 
 export default function NotFound() {

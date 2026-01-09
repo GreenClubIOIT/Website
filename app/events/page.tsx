@@ -1,5 +1,5 @@
 import FallingLeaves from "@/app/components/effects/FallingLeaves";
-import { Button } from "@/app/components/ui/button";
+import { Button } from "@/app/components/ui/Button";
 import RotatingEarth from "@/app/components/effects/RotatingEarth";
 import { Calendar, MapPin, Users, CheckCircle2, Sprout } from "lucide-react";
 import Image from "next/image";
@@ -142,7 +142,7 @@ export default function EventsPage() {
              </h2>
              
              <p className="text-stone-300 text-lg leading-relaxed mb-8 max-w-md">
-               Our initiatives are growing, just like our community. Join 120+ volunteers and help us shape a sustainable future.
+               Our initiatives are growing, just like our community. Join 30+ volunteers and help us shape a sustainable future.
              </p>
 
              <div>
