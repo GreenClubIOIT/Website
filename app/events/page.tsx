@@ -2,10 +2,10 @@
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { 
   Calendar, MapPin, Users, CheckCircle2, Sprout, 
-  Leaf, ArrowRight, Sparkles 
+  Leaf, ArrowRight 
 } from "lucide-react";
 
 // Effects & Components
@@ -138,6 +138,15 @@ export default function EventsPage() {
   const horizontalSectionRef = useRef<HTMLDivElement>(null);
   const horizontalTrackRef = useRef<HTMLDivElement>(null);
   const [isMounted, setIsMounted] = useState(false);
+
+  // --- SCROLL ANIMATION FOR CONNECTOR ---
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "20% start"] 
+  });
+  
+  const pathLength = useTransform(scrollYProgress, [0, 0.8], [0, 1]);
+
   useEffect(() => {
     setIsMounted(true);
   }, []);
@@ -245,7 +254,7 @@ export default function EventsPage() {
         <div className="hidden md:block absolute top-[280px] left-0 w-full h-[250px] pointer-events-none z-0">
             <svg className="w-full h-full" viewBox="0 0 1440 250" preserveAspectRatio="none">
                 <motion.path
-                  d="M 720 0 C 720 100, 300 50, 200 220" 
+                  d="M 720 0 C 720 200, 300 50, 160 220" 
                   fill="none"
                   stroke="#1C3D2E"
                   strokeWidth="2"
@@ -255,11 +264,15 @@ export default function EventsPage() {
                   transition={{ duration: 2, ease: "easeInOut", delay: 0.5 }}
                 />
                 <circle cx="720" cy="0" r="4" fill="#1C3D2E" className="opacity-20" />
-                <path d="M 190 210 L 200 230 L 210 210 Z" fill="#1C3D2E" className="opacity-10" />
+                <path
+                  d="M 190 210 L 200 230 L 210 210 Z"
+                  fill="#1C3D2E"
+                  className="opacity-10"
+                  transform="translate(-39, 0) rotate(39 200 219)"
+                />
             </svg>
         </div>
       )}
-
 
       {/* --- MOBILE: VERTICAL LAYOUT (Visible < md) --- */}
       <section className="md:hidden max-w-7xl mx-auto px-4 pb-32 relative z-10 pt-10">
@@ -308,7 +321,7 @@ export default function EventsPage() {
       >
         <div ref={horizontalTrackRef} className="flex px-[10vw] gap-[5vw] w-fit items-center">
             
-            {/* Intro Card - Updated to align with the connector line */}
+            {/* Intro Card */}
             <div className="horizontal-item w-[300px] flex-shrink-0 flex flex-col justify-center pt-20">
                  <div className="p-8 border-l-4 border-[#1C3D2E] relative bg-gradient-to-r from-[#1C3D2E]/5 to-transparent rounded-r-2xl">
                     <div className="absolute -top-10 -left-1.5 w-3 h-3 bg-[#1C3D2E] rounded-full animate-ping" />
@@ -320,13 +333,16 @@ export default function EventsPage() {
                  </div>
             </div>
 
-            {/* Event Cards */}
+            {/* Event Cards - SHORTENED SIZE */}
             {events.map((event) => (
                 <div 
                     key={`desk-${event.id}`} 
-                    className="horizontal-item w-[70vw] max-w-[1000px] flex-shrink-0 flex items-center gap-10"
+                    // REDUCED SIZE: w-[60vw] and h-[50vh]
+                    className="horizontal-item w-[60vw] max-w-[900px] flex-shrink-0 flex items-center gap-10"
                 >
-                    <div className="w-full bg-white rounded-[2rem] p-4 shadow-xl shadow-[#1C3D2E]/5 border border-[#1C3D2E]/5 flex h-[60vh] transition-transform duration-500 hover:-translate-y-2">
+                    <div className="w-full bg-white rounded-[2rem] p-4 shadow-xl shadow-[#1C3D2E]/5 border border-[#1C3D2E]/5 flex h-[50vh] min-h-[400px] transition-transform duration-500 hover:-translate-y-2">
+                        
+                        {/* Left: Image */}
                         <div className="w-1/2 h-full relative rounded-[1.5rem] overflow-hidden group">
                             <Image 
                                 src={event.image} 
@@ -337,39 +353,46 @@ export default function EventsPage() {
                             <div className="absolute inset-0 bg-gradient-to-t from-[#1C3D2E]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                         </div>
 
-                        <div className="w-1/2 p-8 flex flex-col justify-center relative">
-                            <div className="absolute top-8 right-8 bg-[#DDF5C8] text-[#1C3D2E] px-4 py-1.5 rounded-full text-sm font-bold tracking-wide">
-                                {event.date}
+                        {/* Right: Content */}
+                        <div className="w-1/2 px-6 py-4 flex flex-col h-full justify-between">
+                            
+                            {/* Header */}
+                            <div className="flex justify-between items-start">
+                                <div className="flex items-center gap-2 text-stone-500 text-xs font-medium">
+                                    <MapPin size={14} className="text-green-600 flex-shrink-0" />
+                                    <span className="truncate max-w-[150px]">{event.location}</span>
+                                </div>
+                                <div className="bg-[#DDF5C8] text-[#1C3D2E] px-3 py-1 rounded-full text-[10px] font-bold tracking-wide whitespace-nowrap flex-shrink-0">
+                                    {event.date}
+                                </div>
                             </div>
 
-                            <div className="space-y-6">
-                                <div className="flex items-center gap-2 text-stone-500 text-sm font-medium">
-                                    <MapPin size={16} className="text-green-600" />
-                                    {event.location}
-                                </div>
-
-                                <h2 className="font-heading text-4xl font-bold text-[#1C3D2E] leading-tight">
+                            {/* Main Text - Adjusted sizes for smaller card */}
+                            <div className="flex flex-col gap-3 mt-2">
+                                <h2 className="font-heading text-2xl lg:text-3xl font-bold text-[#1C3D2E] leading-tight">
                                     {event.title}
                                 </h2>
 
-                                <p className="text-lg text-stone-600 leading-relaxed">
+                                <p className="text-sm lg:text-base text-stone-600 leading-relaxed line-clamp-3 hover:line-clamp-none transition-all">
                                     {event.description}
                                 </p>
+                            </div>
 
-                                <div className="pt-4 border-t border-dashed border-stone-200">
-                                    <h4 className="text-sm font-bold uppercase tracking-wider text-[#1C3D2E] mb-3 flex items-center gap-2">
-                                        <Leaf size={14} /> Highlights
-                                    </h4>
-                                    <div className="grid grid-cols-1 gap-2">
-                                        {event.highlights.map((h, i) => (
-                                            <div key={i} className="flex items-center gap-3 text-stone-700 bg-stone-50 px-3 py-2 rounded-lg">
-                                                <CheckCircle2 size={16} className="text-green-600 flex-shrink-0" />
-                                                <span className="text-sm">{h}</span>
-                                            </div>
-                                        ))}
-                                    </div>
+                            {/* Highlights */}
+                            <div className="mt-4 pt-3 border-t border-dashed border-stone-200">
+                                <h4 className="text-xs font-bold uppercase tracking-wider text-[#1C3D2E] mb-2 flex items-center gap-2">
+                                    <Leaf size={12} /> Highlights
+                                </h4>
+                                <div className="flex flex-col gap-1.5">
+                                    {event.highlights.map((h, i) => (
+                                        <div key={i} className="flex items-start gap-2 text-stone-700 bg-stone-50 px-2.5 py-1.5 rounded-lg">
+                                            <CheckCircle2 size={14} className="text-green-600 flex-shrink-0 mt-0.5" />
+                                            <span className="text-xs leading-tight">{h}</span>
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
