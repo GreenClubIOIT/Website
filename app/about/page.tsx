@@ -1,3 +1,6 @@
+import { HeroVisionSection } from "@/app/components/effects/HeroVision";
+import { MissionWheel } from "@/app/components/effects/MissionWheel";
+import { ObjectivesGrid } from "@/app/components/effects/ObjectivesGrid";
 import FallingLeaves from "@/app/components/effects/FallingLeaves";
 import { Sprout, Target, Lightbulb, Users, Globe, CheckCircle2, Leaf } from "lucide-react";
 
@@ -14,44 +17,8 @@ export default function AboutPage() {
       {/* Bottom Left: Soft Orange Glow */}
       <div className="fixed bottom-0 left-0 w-[40vw] h-[40vw] bg-orange-300/30 rounded-full blur-[100px] -z-10 opacity-40" />
 
-
-      {/* --- HERO HEADER --- */}
-      <section className="pt-32 pb-12 text-center max-w-4xl mx-auto px-4 relative z-10">
-        <div className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-white border border-amber-200/40 shadow-sm text-amber-700 text-sm font-semibold tracking-wide mb-6 animate-fade-in-up">
-           <Sprout size={14} className="text-amber-500 fill-current" />
-           <span>Who We Are</span>
-        </div>
-        
-        <h1 className="font-heading font-bold text-5xl md:text-6xl text-forest mb-6 leading-tight">
-          Cultivating <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-orange-600">Change Makers</span>
-        </h1>
-        
-        <p className="text-stone-dark text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
-          Bridging the gap between engineering education and environmental responsibility at AISSMS IOIT.
-        </p>
-      </section>
-
-
-      {/* --- VISION SECTION --- */}
-      <section className="max-w-7xl mx-auto px-4 mb-24 relative z-10">
-        <div className="bg-forest rounded-[2.5rem] p-8 md:p-16 text-center relative overflow-hidden shadow-2xl shadow-forest/20 group">
-          
-          <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 pointer-events-none"></div>
-          
-          {/* Accent Leaf inside the card (Yellow now) */}
-          <Leaf className="absolute -bottom-10 -right-10 w-64 h-64 text-amber-500/10 rotate-12 group-hover:rotate-45 transition-transform duration-1000" />
-          
-          <div className="relative z-10 max-w-4xl mx-auto">
-            <h2 className="font-heading text-3xl font-bold text-amber-400 mb-8 flex items-center justify-center gap-3">
-               <Globe className="w-8 h-8" /> Our Vision
-            </h2>
-            <p className="text-2xl md:text-3xl font-medium text-cream leading-normal">
-              "To cultivate environmentally responsible engineers and citizens by promoting sustainability, ecological balance, and green innovation within the campus and society."
-            </p>
-            <div className="mt-8 w-24 h-1 bg-amber-500/50 mx-auto rounded-full"></div>
-          </div>
-        </div>
-      </section>
+      {/* 1. HERO & VISION (Combined with smooth transitions) */}
+      <HeroVisionSection />
 
 
       {/* --- MISSION & OBJECTIVES --- */}
@@ -63,11 +30,17 @@ export default function AboutPage() {
             <div className="space-y-4">
                <h2 className="font-heading text-4xl font-bold text-forest">Our Mission</h2>
                <p className="text-stone-dark text-lg">
-                 We don't just talk about change; we engineer it. Here is how we plan to transform our campus into a model of sustainability.
+                 We don't just talk about change, we engineer it. Here is how we plan to transform our campus into a model of sustainability.
                </p>
             </div>
 
-            <div className="space-y-6">
+            {/* --- OPTION A: DESKTOP WHEEL (Visible on LG screens) --- */}
+            <div className="hidden lg:block py-4">
+              <MissionWheel />
+            </div>
+
+            {/* --- OPTION B: MOBILE LIST (Visible on small screens) --- */}
+            <div className="space-y-4 lg:hidden">
               <MissionItem text="Create environmental awareness among students and faculty through active drives." />
               <MissionItem text="Encourage sustainable practices like waste reduction, recycling, and energy conservation." />
               <MissionItem text="Engage students in real-world environmental action and community initiatives." />
@@ -83,39 +56,7 @@ export default function AboutPage() {
                <span className="text-sm font-semibold text-amber-700 bg-amber-50 px-3 py-1 rounded-full">Targets</span>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-               <ObjectiveCard 
-                 icon={<Leaf />} 
-                 title="Reduce Footprint" 
-                 desc="Minimize the environmental impact of institutional activities." 
-                 color="text-emerald-600"
-                 bg="bg-emerald-50"
-               />
-               <ObjectiveCard 
-                 icon={<Users />} 
-                 title="Build Leadership" 
-                 desc="Foster social responsibility and leadership skills in students." 
-                 color="text-blue-600"
-                 bg="bg-blue-50"
-                 delay="delay-100"
-               />
-               <ObjectiveCard 
-                 icon={<Lightbulb />} 
-                 title="Green Innovation" 
-                 desc="Encourage students to develop eco-friendly tech solutions." 
-                 color="text-amber-600"
-                 bg="bg-amber-50"
-                 delay="delay-200"
-               />
-               <ObjectiveCard 
-                 icon={<Target />} 
-                 title="Collaboration" 
-                 desc="Strengthen ties with NGOs, schools, and local bodies." 
-                 color="text-purple-600"
-                 bg="bg-purple-50"
-                 delay="delay-300"
-               />
-            </div>
+             <ObjectivesGrid />
           </div>
 
         </div>
