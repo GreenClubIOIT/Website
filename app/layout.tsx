@@ -3,6 +3,7 @@ import { Montserrat, Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/app/components/layout/Navbar";
 import Footer from "@/app/components/layout/Footer";
+import BackgroundMusic from "@/app/components/music/BackGroundMusic"
 
 const montserrat = Montserrat({ 
   subsets: ["latin"],
@@ -31,6 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${montserrat.variable} ${inter.variable} font-sans bg-cream text-forest antialiased`}>
+        <BackgroundMusic />
         <Navbar />
         <main className="min-h-screen pt-20">
           {children}
