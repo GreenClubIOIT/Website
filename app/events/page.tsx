@@ -13,10 +13,11 @@ import FallingLeaves from "@/app/components/effects/FallingLeaves";
 import RotatingEarth from "@/app/components/effects/RotatingEarth";
 import { Button } from "@/app/components/ui/Button";
 
-// GSAP & Lenis
+// GSAP, Lenis, animejs
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "@studio-freight/lenis";
+import { animate, stagger, splitText } from 'animejs';
 
 // --- MAGNETIC COMPONENT ---
 const Magnetic = ({ children }: { children: React.ReactNode }) => {
